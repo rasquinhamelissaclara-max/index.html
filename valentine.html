@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Be My Valentine 💘</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    h1 {
+      color: #ff4d6d;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 12px 25px;
+      margin: 10px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    .yes {
+      background-color: #ff4d6d;
+      color: white;
+    }
+
+    .no {
+      background-color: #ccc;
+    }
+
+    .heart {
+      position: fixed;
+      top: -10px;
+      font-size: 24px;
+      animation: fall 5s linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card" id="content">
+    <h1>Will you be my Valentine? 💖</h1>
+    <button class="yes" onclick="yesValentine()">Yes 💘</button>
+    <button class="no" onclick="askSure()">No 💔</button>
+  </div>
+
+  <script>
+    function yesValentine() {
+      showHearts();
+      document.getElementById("content").innerHTML = `
+        <h1>YAYYY 💕</h1>
+        <p>I knew you would say yes 😌</p>
+        <p>Happy Valentine’s Day 💌</p>
+      `;
+    }
+
+    function askSure() {
+      document.getElementById("content").innerHTML = `
+        <h1>Are you sure? 😳</h1>
+        <button class="no" onclick="goBack()">No 😅</button>
+        <button class="yes" onclick="errorRedirect()">Yes 😐</button>
+      `;
+    }
+
+    function goBack() {
+      location.reload();
+    }
+
+    function errorRedirect() {
+      document.getElementById("content").innerHTML = `
+        <h1>❌ Error 404</h1>
+        <p>Correct answer not found...</p>
+        <p>Redirecting you...</p>
+      `;
+
+      setTimeout(() => {
+        yesValentine();
+      }, 2000);
+    }
+
+    function showHearts() {
+      for (let i = 0; i < 30; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerText = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+        document.body.appendChild(heart);
+      }
+    }
+  </script>
+
+</body>
+</html>
